@@ -1,0 +1,9 @@
+.App{
+  margin: 10px;
+}
+.content{
+  background-color: aquamarine;
+  text-align: center;
+  border: rgb(170, 68, 68);
+  padding: 10px;
+}
