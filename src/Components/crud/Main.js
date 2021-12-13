@@ -1,9 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import User from './User'
 import Adduser from './Adduser';
-import User1 from '../crud/User1';
+
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -44,24 +43,7 @@ const App = () => {
         console.log(err);
       })
   }
-  const Edit = async (id, name, email) => {
-    await fetch(`https://jsonplaceholder.typicode.com/users/${id, name, email}`, {
-      method: 'Update'
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          return
-        } else {
-          setUsers(users.filter((user) => {
-            return user.id !== id;
-          }))
-        }
-
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
+  
 
   const onDelete = async (id) => {
     await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
@@ -92,13 +74,13 @@ const App = () => {
       <div>
         {
           users.map((user) => (
-            <User
+            <Adduser
               id={user.id}
               key={user.id}
               name={user.name}
               email={user.email}
               onDelete={onDelete}
-              Edit={Edit}
+              // Edit={Edit}
             />
 
           ))

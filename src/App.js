@@ -6,6 +6,9 @@ import Map from '../src/Components/Map/Map'
 import Filter from './Components/Map/Filter';
 import Filter1 from './Components/Map/Filter1';
 import Update from './Components/Update';
+import Putt from '../src/Components/Putt'
+
+
 
 
 function App() {
@@ -13,7 +16,7 @@ function App() {
     <div className='App'>
 
       <div className='Content'>
-        <Update />
+        <Putt />
 
       </div>
       
