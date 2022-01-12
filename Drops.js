@@ -1,5 +1,5 @@
-import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useState } from 'react'
+import { Formik, Form, Field } from 'formik';
 const todo = [{
     floorId: 1,
     floorName: "FIRIS FLOOR ",
@@ -16,10 +16,19 @@ const todo = [{
     ]
 }
 ];
+
 const Drops = () => {
-    const ChangeFloor = (floorId) => {
-    var department = todo.filter(x =>x.floorId === floorId)
-  console.log('dept',Drops)
+    const [state, setstate] = useState({
+        departments: [],
+        services: []
+    });
+
+    const changeFloor = (floorid) => {
+        var selectedFloor = todo.filter(x => x.floorId === +floorid);
+        selectedFloor = selectedFloor[0]?.departments;
+        console.log('selectedDepts', selectedFloor)
+        setstate({ departments: selectedFloor });
+
     }
     return (
         <div>
@@ -27,7 +36,8 @@ const Drops = () => {
                 initialValues={{
                     floor: '',
                     department: '',
-                    service: ''
+                    service: '',
+
                 }}
                 onSubmit={(values) => {
                     alert(JSON.stringify(values, null, 2));
@@ -35,16 +45,18 @@ const Drops = () => {
             >
                 {({ values }) => (
                     <Form>
-               {console.log('values',values)}
-                        <Field component="select" id="floor" name="floor" onChange={ChangeFloor(values.floor)}>
+                        {console.log('values', values, state)}
 
-                            {todo.map(x => (<option value={x.floorId}>{x.floorName}</option>))}
+                        <Field as="select" id="floor" name="floor" onChange={(e) => { changeFloor(e.target.value) }}>
+                            {todo.map(x => (<option value={x.floorId}>{x.floorName} </option>))}
                         </Field>
-                        <Field component="select" id="department" name="department" onChange={ChangeFloor(values.floor)}>
 
+                        <Field component="select" id="department" name="department" >
+                            {state.departments?.map(x => (<option value={x.deptId}>{x.deptName} </option>))}
                         </Field>
-                        <Field component="select" id="service" name="service"  onChange={ChangeFloor(values.floor)}>
 
+                        <Field component="select" id="service" name="service" >
+                            {todo.service?.map(x => (<option value={x.serviceId}>{x.serviceName} </option>))}
                         </Field>
                         <button type="submit">Submit</button>
                     </Form>
